@@ -7,8 +7,6 @@ namespace gbemu
 {
     public class Memory
     {
-        public MemoryController MemoryController { get; internal set; }
-        public GraphicsProcessor GraphicsProcessor { get; internal set; }
 
         public string GameTitle { get; set; }
 

@@ -2,7 +2,7 @@
 
 namespace gbemu
 {
-    internal class CartridgeReader
+    public class CartridgeReader
     {
         /// <summary>
         /// Reference to the Memory map of the emulator.

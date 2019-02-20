@@ -1,4 +1,5 @@
-﻿using gbemu;
+﻿using Autofac;
+using gbemu;
 using System;
 using System.IO;
 
@@ -8,6 +9,7 @@ namespace gb
     {
         static void Main(string[] args)
         {
+
             var gameBoy = new Gameboy();
 
             using (var fileStream = File.Open(@"C:\Users\scott\source\repos\gbemu\assets\ld.gb", FileMode.Open))

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autofac;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -18,7 +19,7 @@ namespace gbemu
         /// <summary>
         /// Returns the currently loaded ROM's title.
         /// </summary>
-        public string GameLoaded => Memory.GameTitle;
+        public string GameLoaded => MemoryController.Memory.GameTitle;
 
         /// <summary>
         /// 
@@ -31,52 +32,14 @@ namespace gbemu
         internal MemoryController MemoryController { get; set; }
 
         /// <summary>
-        /// 
-        /// </summary>
-        internal Memory Memory { get; set; }
-
-        /// <summary>
         /// Responsible for reading a ROM.
         /// </summary>
-        internal CartridgeReader CartridgeReader { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        internal EmulatedInput Input { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        internal GraphicsProcessor GraphicsProcessor { get; set; }
+        public CartridgeReader CartridgeReader { get; set; }
 
         public Gameboy()
         {
-            // Initialize internal components
-            Processor = new Processor();
-            MemoryController = new MemoryController();
-            Memory = new Memory();
-            CartridgeReader = new CartridgeReader();
-            Input = new EmulatedInput();
-            GraphicsProcessor = new GraphicsProcessor();
-
-            // Wire up dependencies
-            // Dependency Injection may be good here
-            MemoryController.Memory = Memory;
-            MemoryController.Processor = Processor;
-            MemoryController.GraphicsProcessor = GraphicsProcessor;
-
-            Processor.MemoryController = MemoryController;
-
-            // Stack pointer initialized to this position
-            Processor.SP = Memory.MemoryMap[0xEFFF];
-
-            Memory.MemoryController = MemoryController;
-            Memory.GraphicsProcessor = GraphicsProcessor;
-
-            Input.MemoryController = MemoryController;
-
-            CartridgeReader.Memory = Memory;
+            // Resolve module dependencies via Property Injection
+            GameboyComponents.Register(this);
         }
 
         /// <summary>
