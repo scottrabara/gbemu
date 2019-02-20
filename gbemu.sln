@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gbemu", "gbemu\gbemu.csproj", "{AC070AAC-2300-4133-9790-4CF26A4F7176}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "gbtest", "gb\gbtest.csproj", "{0ADF7703-991C-480A-842A-95D9EA7529BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC070AAC-2300-4133-9790-4CF26A4F7176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC070AAC-2300-4133-9790-4CF26A4F7176}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC070AAC-2300-4133-9790-4CF26A4F7176}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC070AAC-2300-4133-9790-4CF26A4F7176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ADF7703-991C-480A-842A-95D9EA7529BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ADF7703-991C-480A-842A-95D9EA7529BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ADF7703-991C-480A-842A-95D9EA7529BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ADF7703-991C-480A-842A-95D9EA7529BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BDB5B9C4-8810-4F5E-B74D-F42E8222450A}
+	EndGlobalSection
+EndGlobal
