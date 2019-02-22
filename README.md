@@ -11,6 +11,7 @@ This is a Gameboy emulator written in C# and ASP.NET Core/Standard. If you are c
   - Fetch Opcodes from Memory
   - Decode Opcodes (technique on this is still in discussion; currently using Dictionary with opcode being the index, and returning an action to execute.
   - Implement all Flags and Register related functionality; i.e. Updating Flags and Registers, returning Paired Registers, etc
+  - How do we test the Processor Module? [Here is a collection](https://github.com/retrio/gb-test-roms) of gb-test-roms that we may be able to leverage.
 - Look into MemoryController and Memory management
 
 
