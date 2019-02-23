@@ -95,11 +95,11 @@ namespace GBEmu.Emulation
             },
 
             // 0x7X
-            // LD HL, n
+            // LD (HL), n
             // LD A, n
             [0x7] = (p, o) =>
             {
-                p.LD_UpdateMemoryFromHL(o);
+                p.LD_UpdateMemoryFromRegisterPair(o, Register.HL);
             },
             [0xA] = (p, o) => { },
             [0xB] = (p, o) => { },
@@ -151,24 +151,25 @@ namespace GBEmu.Emulation
             }
         }
 
-        internal void LD_UpdateMemoryFromHL(int value)
+        internal void LD_UpdateMemoryFromRegisterPair(int value, Register r1)
         {
             var right = value.GetRightNibble();
 
             if (right > 7)
             {
-                LD_UpdateRegister(value, Register.HL);
+                // 0x78 and above, update register A
+                LD_UpdateRegister(value, r1);
                 return;
             }
 
             Register operandTwo = (Register)right;
 
-            if ((Register)right == Register.HL)
+            if (operandTwo == Register.HL && operandTwo == r1)
             {
                 return;
             }
 
-            var memLocation = Registers[Register.HL];
+            var memLocation = Registers[r1];
             WriteByte(memLocation, Registers[operandTwo]);
         }
     }
