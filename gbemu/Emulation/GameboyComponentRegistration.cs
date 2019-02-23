@@ -9,6 +9,8 @@ namespace GBEmu.Emulation
         {
             var builder = new ContainerBuilder();
 
+            // The types registered below could probably be moved into their respective constructors
+
             // Register the passed instance of gameboy
             builder.RegisterInstance(gameboy)
                 .OnActivated(e =>
@@ -43,7 +45,7 @@ namespace GBEmu.Emulation
 
             var container = builder.Build();
            
-            var gboy = container.Resolve<Gameboy>();
+            container.Resolve<Gameboy>();
         }
     }
 }
