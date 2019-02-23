@@ -23,34 +23,8 @@ namespace GBEmu.Emulation
         // int based registers
         internal int SP, PC;
 
-        // Register dictionary
-        internal Dictionary<Register, int> registers = 
-            new Dictionary<Register, int>
-            {
-                [Register.B] = 0,
-                [Register.C] = 0,
-                [Register.D] = 0,
-                [Register.E] = 0,
-                [Register.H] = 0,
-                [Register.L] = 0,
-                [Register.HL] = 0,
-                [Register.A] = 0
-            };
-
-        private int ReadHL()
-        {
-            registers[Register.HL] = (registers[Register.H] << 4) | registers[Register.L];
-            return registers[Register.HL];
-        }
-
-        private void WriteHL(int value)
-        {
-            var left = value.GetLeftNibble();
-            var right = value.GetRightNibble();
-            registers[Register.H] = left;
-            registers[Register.L] = right;
-            registers[Register.HL] = value;
-        }
+        // Registers
+        internal Registers Registers { get; set; }
 
         public Processor()
         {
@@ -110,7 +84,7 @@ namespace GBEmu.Emulation
                 }
 
                 Register operandTwo = (Register) right;
-                p.registers[operandOne] = p.registers[operandTwo];
+                p.Registers[operandOne] = p.Registers[operandTwo];
             },
 
             // 0x5X
@@ -128,7 +102,7 @@ namespace GBEmu.Emulation
                 }
 
                 Register operandTwo = (Register)right;
-                p.registers[operandOne] = p.registers[operandTwo];
+                p.Registers[operandOne] = p.Registers[operandTwo];
             },
 
             // 0x6X
@@ -146,7 +120,7 @@ namespace GBEmu.Emulation
                 }
 
                 Register operandTwo = (Register)right;
-                p.registers[operandOne] = p.registers[operandTwo];
+                p.Registers[operandOne] = p.Registers[operandTwo];
             },
 
             // 0x7X
@@ -172,12 +146,12 @@ namespace GBEmu.Emulation
 
                 if (operandOne == Register.HL)
                 {
-                    var memLocation = (p.registers[Register.H] << 4) | p.registers[Register.L];
-                    p.WriteByte(memLocation, p.registers[operandTwo]);
+                    var memLocation = p.Registers[Register.HL];
+                    p.WriteByte(memLocation, p.Registers[operandTwo]);
                 }
                 else
                 {
-                    p.registers[operandOne] = p.registers[operandTwo];
+                    p.Registers[operandOne] = p.Registers[operandTwo];
                 }
             },
             [0xA] = (p, o) => { },
