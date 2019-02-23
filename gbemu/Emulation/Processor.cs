@@ -29,6 +29,7 @@ namespace GBEmu.Emulation
         public Processor()
         {
             PC = 0;
+            Registers = new Registers();
         }
 
         internal void UpdateFlags(int value)
@@ -74,17 +75,7 @@ namespace GBEmu.Emulation
             // LD C, n
             [0x4] = (p, o) => 
             {
-                var right = o.GetRightNibble();
-                Register operandOne = Register.B;
-
-                if (right > 7)
-                {
-                    right = right - 8;
-                    operandOne = Register.C;
-                }
-
-                Register operandTwo = (Register) right;
-                p.Registers[operandOne] = p.Registers[operandTwo];
+                p.LD_UpdateRegister(o, Register.B);
             },
 
             // 0x5X
@@ -92,17 +83,7 @@ namespace GBEmu.Emulation
             // LD E, n
             [0x5] = (p, o) =>
             {
-                var right = o.GetRightNibble();
-                Register operandOne = Register.D;
-
-                if (right > 7)
-                {
-                    right = right - 8;
-                    operandOne = Register.E;
-                }
-
-                Register operandTwo = (Register)right;
-                p.Registers[operandOne] = p.Registers[operandTwo];
+                p.LD_UpdateRegister(o, Register.D);
             },
 
             // 0x6X
@@ -110,17 +91,7 @@ namespace GBEmu.Emulation
             // LD L, n
             [0x6] = (p, o) =>
             {
-                var right = o.GetRightNibble();
-                Register operandOne = Register.H;
-
-                if (right > 7)
-                {
-                    right = right - 8;
-                    operandOne = Register.L;
-                }
-
-                Register operandTwo = (Register)right;
-                p.Registers[operandOne] = p.Registers[operandTwo];
+                p.LD_UpdateRegister(o, Register.H);
             },
 
             // 0x7X
@@ -128,31 +99,7 @@ namespace GBEmu.Emulation
             // LD A, n
             [0x7] = (p, o) =>
             {
-                var right = o.GetRightNibble();
-                Register operandOne = Register.HL;
-
-                if (right > 7)
-                {
-                    right = right - 8;
-                    operandOne = Register.A;
-                }
-
-                if (operandOne == (Register)right)
-                {
-                    return;
-                }
-
-                Register operandTwo = (Register)right;
-
-                if (operandOne == Register.HL)
-                {
-                    var memLocation = p.Registers[Register.HL];
-                    p.WriteByte(memLocation, p.Registers[operandTwo]);
-                }
-                else
-                {
-                    p.Registers[operandOne] = p.Registers[operandTwo];
-                }
+                p.LD_UpdateMemoryFromHL(o);
             },
             [0xA] = (p, o) => { },
             [0xB] = (p, o) => { },
@@ -179,6 +126,50 @@ namespace GBEmu.Emulation
             {
                 a.Invoke(this, param);
             }
+        }
+
+        internal void LD_UpdateRegister(int value, Register r1)
+        {
+            var right = value.GetRightNibble();
+            Register operandOne = r1;
+
+            if (right > 7)
+            {
+                right = right - 8;
+                operandOne++;
+            }
+
+            Register operandTwo = (Register) right;
+            if (operandTwo == Register.HL)
+            {
+                var memLocation = Registers[Register.HL];
+                Registers[operandOne] = ReadByte(memLocation);
+            }
+            else
+            {
+                Registers[operandOne] = Registers[operandTwo];
+            }
+        }
+
+        internal void LD_UpdateMemoryFromHL(int value)
+        {
+            var right = value.GetRightNibble();
+
+            if (right > 7)
+            {
+                LD_UpdateRegister(value, Register.HL);
+                return;
+            }
+
+            Register operandTwo = (Register)right;
+
+            if ((Register)right == Register.HL)
+            {
+                return;
+            }
+
+            var memLocation = Registers[Register.HL];
+            WriteByte(memLocation, Registers[operandTwo]);
         }
     }
 }
