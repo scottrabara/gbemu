@@ -3,9 +3,9 @@ using System;
 
 namespace GBEmu.Emulation
 {
-    public static class GameboyComponentRegistration
+    internal static class GameboyComponentRegistration
     {
-        public static void Register(Gameboy gameboy)
+        internal static void Register(Gameboy gameboy)
         {
             var builder = new ContainerBuilder();
 
