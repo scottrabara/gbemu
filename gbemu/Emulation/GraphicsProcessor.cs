@@ -1,4 +1,4 @@
-﻿namespace gbemu
+﻿namespace GBEmu.Emulation
 {
     public class GraphicsProcessor
     {

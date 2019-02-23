@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace gbemu
+namespace GBEmu.Emulation
 {
     // Core emulation of the gameboy. 
     // This contains references to all major components. This also handles creation and "wiring" up of the components
@@ -39,7 +39,7 @@ namespace gbemu
         public Gameboy()
         {
             // Resolve module dependencies via Property Injection
-            GameboyComponents.Register(this);
+            GameboyComponentRegistration.Register(this);
         }
 
         /// <summary>

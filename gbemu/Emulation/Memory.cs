@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace gbemu
+namespace GBEmu.Emulation
 {
     public class Memory
     {

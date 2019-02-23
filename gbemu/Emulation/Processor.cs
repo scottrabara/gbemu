@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
 
-namespace gbemu
+namespace GBEmu.Emulation
 {
     /// <summary>
     /// This is the main processing unit for the gb emulator. 

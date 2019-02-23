@@ -1,9 +1,10 @@
 ﻿using Autofac;
-using gbemu;
+using GBEmu.Emulation;
+using GBEmu.Utils;
 using System;
 using System.IO;
 
-namespace gb
+namespace GBTest
 {
     class Program
     {

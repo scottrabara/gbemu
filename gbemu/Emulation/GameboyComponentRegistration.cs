@@ -1,9 +1,9 @@
 ﻿using Autofac;
 using System;
 
-namespace gbemu
+namespace GBEmu.Emulation
 {
-    public class GameboyComponents
+    public static class GameboyComponentRegistration
     {
         public static void Register(Gameboy gameboy)
         {

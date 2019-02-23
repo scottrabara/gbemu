@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace gbemu
+namespace GBEmu.Emulation
 {
     public class CartridgeReader
     {
