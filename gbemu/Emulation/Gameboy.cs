@@ -56,8 +56,8 @@ namespace GBEmu.Emulation
             while (Processor.PC != -1)
             {
                 int ins = Processor.FetchIns();
-                Action<Processor> a = Processor.Decode(ins);
-                Processor.Execute(a);
+                Action<Processor, int> a = Processor.Decode(ins);
+                Processor.Execute(a, ins);
             }
         }
     }
