@@ -15,6 +15,7 @@ namespace GBEmu.Emulation
         public MemoryController MemoryController { get; set; }
 
         // int based registers
+        // TODO: Should these live in Registers as well?
         internal int SP, PC;
 
         // Registers
