@@ -22,9 +22,10 @@ All decisions are loosely made are open for discussion for improvement. Most dec
 
 - [Awesome curated list of Emulator Development Resources](https://github.com/gbdev/awesome-gbdev#emulator-development)
 
--CPU/OpCode Resources-
--[Gameboy CPU Manual](http://marc.rawer.de/Gameboy/Docs/GBCPUman.pdf) |
--[Gameboy CPU (LR35902) instruction set](http://www.pastraiser.com/cpu/gameboy/gameboy_opcodes.html) |
--[GameBoy Opcode Summary](http://www.devrs.com/gb/files/opcodes.html) |
--[GameBoy CPU InstructionSet Sheet (GCISheet)](http://www.devrs.com/gb/files/GBCPU_Instr.html) |
--[DECODING Gameboy Z80 OPCODES](https://gb-archive.github.io/salvage/decoding_gbz80_opcodes/Decoding%20Gamboy%20Z80%20Opcodes.html)
+| CPU/OpCode Resources |
+| -------------------- |
+| [Gameboy CPU Manual](http://marc.rawer.de/Gameboy/Docs/GBCPUman.pdf) |
+| [Gameboy CPU (LR35902) instruction set](http://www.pastraiser.com/cpu/gameboy/gameboy_opcodes.html) |
+| [GameBoy Opcode Summary](http://www.devrs.com/gb/files/opcodes.html) |
+| [GameBoy CPU InstructionSet Sheet (GCISheet)](http://www.devrs.com/gb/files/GBCPU_Instr.html) |
+| [DECODING Gameboy Z80 OPCODES](https://gb-archive.github.io/salvage/decoding_gbz80_opcodes/Decoding%20Gamboy%20Z80%20Opcodes.html) |
