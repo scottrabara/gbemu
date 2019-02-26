@@ -18,11 +18,11 @@ namespace GBEmu.Emulation.Processing.StringMaps
     {
         // TODO: Create maps for all instruction types given an opcode.
 
-        const string StringMapLD = "7010701070107010FFFFFFFFFFFFFFFF000000000000000000000000A020A020";
+        const string StringMapLD = "6010601060106010FFFFFFFFFFFFFFFF000000000000000000000000A020A020";
 
         internal static Type GetInstruction(int opcode)
         {
-            if (StringMapLD.ToBinary()[opcode] == '1')
+            if (StringMapLD.ContainsBitCharInMap(opcode))
             {
                 return typeof(InstructionLD);
             }
