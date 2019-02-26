@@ -14,13 +14,8 @@ namespace GBEmu.Emulation
     {
         public MemoryController MemoryController { get; set; }
 
-        // Flags
-        internal bool ZeroFlag,       // Z
-                      AddSubFlag,     // N
-                      HalfCarryFlag,  // H
-                      CarryFlag;      // C
-
         // int based registers
+        // TODO: Should these live in Registers as well?
         internal int SP, PC;
 
         // Registers
@@ -34,13 +29,7 @@ namespace GBEmu.Emulation
 
         internal void UpdateFlags(int value)
         {
-            ZeroFlag = (value == 0);
-
-            // TODO: AddSubFlag
-
-            // TODO: HalfCarryFlag
-
-            // TODO: CarryFlag
+            // TODO: This needs to live in the Registers class and manipulate the F register
         }
 
         internal int ReadByte(int address)
