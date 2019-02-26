@@ -5,6 +5,11 @@ using System.Text;
 
 namespace GBEmu.Emulation.Processing.Instructions
 {
+    /// <summary>
+    /// Base instruction for all LD instruction.
+    /// All LD instructions should have two operants.
+    /// Each could be a RegisterParam, or a MemoryParam
+    /// </summary>
     public class InstructionLD : IInstruction
     {
         public string BaseInstruction { get; set; } = "LD {0}, {1}";

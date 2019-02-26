@@ -5,6 +5,9 @@ using System.Text;
 
 namespace GBEmu.Emulation.Processing.Instructions
 {
+    /// <summary>
+    /// Param representing a Register from the Gameboy CPU.
+    /// </summary>
     internal class RegisterParam : IInstructionParam
     {
         public Register Register { get; set; }

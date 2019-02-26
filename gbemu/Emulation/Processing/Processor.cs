@@ -27,6 +27,7 @@ namespace GBEmu.Emulation.Processing
         public Processor()
         {
             PC = 0;
+            // TODO: This can get added to DI call in GameboyComponentRegistration
             Registers = new Registers();
         }
 
@@ -66,36 +67,44 @@ namespace GBEmu.Emulation.Processing
             return FetchIns();
         }
 
-        #region New Instructions Method
+        #region Instructions Method
         internal Action Instruction(int opcode)
         {
-            // Get instruction with params (LD n, n)
+            // Get instruction with params via opcode (etc: LD n, n)
+            // using maps in InstructionMap
             Type type = InstructionMap.GetInstruction(opcode);
 
             if (type != null)
             {
+                // If instruction is found, create instruction instance as Instruction
                 var instruction = Activator.CreateInstance(type) as IInstruction;
+
+                // Fetch params using maps in ParamOneMap and ParamTwoMap
                 var instructionParams = ParamMap.GetParams(this, opcode);
                 instruction.Params = instructionParams;
 
+                // Return Action from defined Instruction type
+                // TODO: Return action, or invoke right away?
                 return instruction.Action;
             }
-            // else return instruction not implemented
+            // If no instruction is found, throw missing opcode exception
+            // TODO: Create Missing Opcode Exception, for now return null
             return null;
         }
         #endregion
 
-        internal Action Decode(int b)
+        internal Action Decode(int opcode)
         {
-            Action action = Instruction(b);
+            // Given an opcode, fetch action to execute
+            Action action = Instruction(opcode);
             return action;
         }
         
-        internal void Execute(Action a)
+        internal void Execute(Action action)
         {
-            if (a != null)
+            if (action != null)
             {
-                a.Invoke();
+                action.Invoke();
             }
         }
     }

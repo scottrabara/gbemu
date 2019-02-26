@@ -5,6 +5,9 @@ using System.Text;
 
 namespace GBEmu.Emulation.Processing.Instructions
 {
+    /// <summary>
+    /// Param representing a value in memory.
+    /// </summary>
     internal class MemoryParam : IInstructionParam
     {
         private readonly Processor _processor;

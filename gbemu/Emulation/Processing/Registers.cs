@@ -6,6 +6,9 @@ using System.Text;
 
 namespace GBEmu.Emulation.Processing
 {
+    /// <summary>
+    /// Registers object for the Gameboy CPU. Represents the entire collection of Registers.
+    /// </summary>
     internal class Registers
     {
         internal Register A { get; set; }
