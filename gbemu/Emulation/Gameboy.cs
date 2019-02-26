@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using GBEmu.Emulation.Processing;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -53,11 +54,14 @@ namespace GBEmu.Emulation
 
         public void Start()
         {
-            while (Processor.PC != -1)
+            while (Processor.PC < 65535)
             {
                 int ins = Processor.FetchIns();
-                Action<Processor, int> a = Processor.Decode(ins);
-                Processor.Execute(a, ins);
+                if (ins != -1)
+                {
+                    Action a = Processor.Decode(ins);
+                    Processor.Execute(a);
+                }
             }
         }
     }
