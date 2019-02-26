@@ -19,7 +19,9 @@ namespace GBEmu.Emulation.Processing
         internal Register F { get; set; }
         internal Register H { get; set; }
         internal Register L { get; set; }
-        internal Register HL { get; set; }
+
+        // TODO: Reinstate the SetPair, GetPair logic
+        internal Register HL { get ; set; }
         internal Register BC { get; set; }
         internal Register DE { get; set; }
         internal Register AF { get; set; }
