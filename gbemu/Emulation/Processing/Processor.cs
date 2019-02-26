@@ -17,23 +17,13 @@ namespace GBEmu.Emulation.Processing
     {
         public MemoryController MemoryController { get; set; }
 
-        // int based registers
-        // TODO: Should these live in Registers as well?
-        internal int PC;
-
         // Registers
         internal Registers Registers { get; set; }
 
         public Processor()
         {
-            PC = 0;
             // TODO: This can get added to DI call in GameboyComponentRegistration
             Registers = new Registers();
-        }
-
-        internal void UpdateFlags(int value)
-        {
-            // TODO: This needs to live in the Registers class and manipulate the F register
         }
 
         internal int ReadByte(int address)
@@ -49,8 +39,8 @@ namespace GBEmu.Emulation.Processing
 
         internal int FetchIns()
         {
-            var value = ReadByte(PC);
-            PC++;
+            var value = ReadByte(Registers.PC.Value);
+            Registers.PC.Value++;
             return value;
         }
 

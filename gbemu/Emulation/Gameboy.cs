@@ -54,7 +54,7 @@ namespace GBEmu.Emulation
 
         public void Start()
         {
-            while (Processor.PC < 65535)
+            while (Processor.Registers.PC.Value < 65535)
             {
                 int ins = Processor.FetchIns();
                 if (ins != -1)
