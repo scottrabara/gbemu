@@ -21,13 +21,13 @@ namespace GBEmu.Emulation.Processing
         internal Register L { get; set; }
 
         // TODO: Reinstate the SetPair, GetPair logic
-        internal Register HL { get ; set; }
+        internal Register HL { get; set; }
         internal Register BC { get; set; }
         internal Register DE { get; set; }
         internal Register AF { get; set; }
 
-        internal Register SP;
-        internal Register PC;
+        internal Register SP { get; set; }
+        internal Register PC {get; set; }
 
         internal Registers()
         {
@@ -43,6 +43,8 @@ namespace GBEmu.Emulation.Processing
             BC = new Register(RegisterEnum.BC);
             DE = new Register(RegisterEnum.DE);
             AF = new Register(RegisterEnum.AF);
+            SP = new Register(RegisterEnum.SP);
+            PC = new Register(RegisterEnum.PC);
         }
 
         private int GetPair(Register r1, Register r2)

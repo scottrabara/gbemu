@@ -16,23 +16,52 @@ namespace GBEmu.Emulation.Processing.StringMaps
     /// </summary>
     static class ParamTwoMap
     {
-        // TODO: Create maps for all registers given an opcode. A and BC are not correct.
-
+        // TODO: Create maps for all registers given an opcode.
+        #region Register Based Constants
         const string A =
-            "002000200020002000000000000000FFFFFFFFFFFFFFFFFF090909090909A222";
+            "";
+        const string B =
+            "";
+        const string C =
+            "";
+        const string D =
+            "";
+        const string E =
+            "";
+        const string F =
+            "";
+        const string H =
+            "";
+        const string L =
+            "";
+        const string HL =
+            "";
         const string BC =
-            "7010701070107010000000000000000000000000000000000000000000004410";
+            "";
+        const string DE =
+            "";
+        const string AF =
+            "";
+        #endregion
 
+        #region Memory Based Constants
+        const string AddressAtBC =
+            "";
+        const string AddressAtDE =
+            "";
+        const string AddressAtHL =
+            "";
+        const string AddressAtC =
+            "";
+        const string Immediate16Bit =
+            "";
+        const string Immediate8Bit =
+            "";
+        #endregion
+
+        // TODO: Hook up the StringMap checking
         public static IInstructionParam GetParamTwo(Processor processor, int opcode)
         {
-            if (A.ToBinary()[opcode] == '1')
-            {
-                return new RegisterParam(processor.Registers.A);
-            }
-            if (BC.ToBinary()[opcode] == '1')
-            {
-                return new RegisterParam(processor.Registers.BC);
-            }
             return null;
         }
     }
