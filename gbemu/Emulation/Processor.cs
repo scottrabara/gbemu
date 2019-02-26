@@ -61,11 +61,69 @@ namespace GBEmu.Emulation
             return value;
         }
 
+        internal int Immediate16Bits()
+        {
+            var left = FetchIns();
+            var right = FetchIns();
+            var result = (left << 8) | right;
+            return result;
+        }
+
+        internal int Immediate8Bits()
+        {
+            return FetchIns();
+        }
+
         // LD r1,r2
         // Loads r2 into r1
         internal Dictionary<int, Action<Processor, int>> Instructions = new Dictionary<int, Action<Processor, int>>
         {
-            [0x0] = (p, o) => { },
+            [0x0] = (p, o) => 
+            {
+                Register r1 = 0;
+                var right = o.GetRightNibble();
+                switch (right)
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                        {
+                            r1 = Register.BC;
+                            break;
+                        }
+                    case 4:
+                    case 5:
+                    case 6:
+                        {
+                            r1 = Register.B;
+                            break;
+                        }
+                    case 7:
+                    case 8:
+                        {
+                            r1 = Register.SP;
+                            break;
+                        }
+                    case 9:
+                    case 10:
+                    case 11:
+                        {
+                            r1 = Register.BC;
+                            break;
+                        }
+                    case 12:
+                    case 13:
+                    case 14:
+                        {
+                            r1 = Register.C;
+                            break;
+                        }
+                    case 15:
+                    default:
+                        break;
+                }
+                p.LD_LD_INC_DEC_LD(o, r1);
+            },
             [0x1] = (p, o) => { },
             [0x2] = (p, o) => { },
             [0x3] = (p, o) => { },
@@ -101,6 +159,8 @@ namespace GBEmu.Emulation
             {
                 p.LD_UpdateMemoryFromRegisterPair(o, Register.HL);
             },
+            [0x8] = (p, o) => { },
+            [0x9] = (p, o) => { },
             [0xA] = (p, o) => { },
             [0xB] = (p, o) => { },
             [0xC] = (p, o) => { },
@@ -142,7 +202,7 @@ namespace GBEmu.Emulation
             Register operandTwo = (Register) right;
             if (operandTwo == Register.HL)
             {
-                var memLocation = Registers[Register.HL];
+                var memLocation = Registers.HL;
                 Registers[operandOne] = ReadByte(memLocation);
             }
             else
@@ -171,6 +231,106 @@ namespace GBEmu.Emulation
 
             var memLocation = Registers[r1];
             WriteByte(memLocation, Registers[operandTwo]);
+        }
+
+        // Instruction sets from 0x-3x
+        internal void LD_LD_INC_DEC_LD(int value, Register r1)
+        {
+            var right = value.GetRightNibble();
+            switch (right)
+            {
+                // LD rr, d16
+                case 1:
+                    {
+                        Registers[r1] = Immediate16Bits();
+                        break;
+                    }
+                // LD (rr), A
+                case 2:
+                    {
+                        Registers[r1] = Registers.A;
+                        break;
+                    }
+                // INC rr
+                case 3:
+                    {
+                        Registers[r1]++;
+                        break;
+                    }
+                // INC r
+                case 4:
+                    {
+                        Registers[r1]++;
+                        break;
+                    }
+                // DEC r
+                case 5:
+                    {
+                        Registers[r1]--;
+                        break;
+                    }
+                // LD r, d8
+                case 6:
+                    {
+                        Registers[r1] = Immediate8Bits();
+                        break;
+                    }
+                // RLCA
+                case 7:
+                    {
+                        break;
+                    }
+                // LD (a16), SP
+                case 8:
+                    {
+                        Registers[r1]--;
+                        break;
+                    }
+                // ADD HL, rr
+                case 9:
+                    {
+                        Registers[r1]--;
+                        break;
+                    }
+                // LD A, (rr)
+                case 10:
+                    {
+                        Registers[Register.A] = ReadByte(Registers[r1]);
+                        break;
+                    }
+                // DEC rr
+                case 11:
+                    {
+                        Registers[r1]--;
+                        break;
+                    }
+                // INC r
+                case 12:
+                    {
+                        Registers[r1]++;
+                        break;
+                    }
+                // DEC r
+                case 13:
+                    {
+                        Registers[r1]--;
+                        break;
+                    }
+                // LD r, d8
+                case 14:
+                    {
+                        Registers[r1] = Immediate8Bits();
+                        break;
+                    }
+                // DEC r
+                case 15:
+                    {
+                        Registers[r1]--;
+                        break;
+                    }
+                default:
+                    break;
+            }
         }
     }
 }
