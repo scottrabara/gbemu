@@ -16,7 +16,9 @@ namespace GBEmu.Emulation.Processing.StringMaps
     {
         public static IInstructionParam[] GetParams(Processor processor, int opcode)
         {
-            var instructionParams = new[] { ParamOneMap.GetParamOne(processor, opcode), ParamTwoMap.GetParamTwo(processor, opcode) };
+            var paramOne = ParamOneMap.GetParamOne(processor, opcode);
+            var paramTwo = ParamTwoMap.GetParamTwo(processor, opcode);
+            var instructionParams = new[] { paramOne, paramTwo };
 
             return instructionParams;
         }
