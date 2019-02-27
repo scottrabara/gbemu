@@ -18,7 +18,14 @@ namespace GBEmu.Emulation.Processing
             Name = registerEnum;
         }
 
+        public Register(RegisterEnum registerEnum, bool isPair)
+        {
+            Name = registerEnum;
+            IsPair = isPair;
+        }
+
         internal int Value { get; set; }
         internal RegisterEnum Name { get; set; }
+        internal bool IsPair { get; set; }
     }
 }

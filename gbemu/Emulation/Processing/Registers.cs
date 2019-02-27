@@ -39,10 +39,10 @@ namespace GBEmu.Emulation.Processing
             F = new Register(RegisterEnum.F);
             H = new Register(RegisterEnum.H);
             L = new Register(RegisterEnum.L);
-            HL = new Register(RegisterEnum.HL);
-            BC = new Register(RegisterEnum.BC);
-            DE = new Register(RegisterEnum.DE);
-            AF = new Register(RegisterEnum.AF);
+            HL = new Register(RegisterEnum.HL, true);
+            BC = new Register(RegisterEnum.BC, true);
+            DE = new Register(RegisterEnum.DE, true);
+            AF = new Register(RegisterEnum.AF, true);
             SP = new Register(RegisterEnum.SP);
             PC = new Register(RegisterEnum.PC);
         }
