@@ -54,14 +54,18 @@ namespace GBEmu.Emulation.Processing.StringMaps
         const string AddressAtC =
             "";
         const string Immediate16Bit =
-            "";
+            "4000400040004000000000000000000000000000000000000000000000000000";
         const string Immediate8Bit =
-            "";
+            "0202020202020202000000000000000000000000000000000202020202020202";
         #endregion
 
         // TODO: Hook up the StringMap checking
         public static IInstructionParam GetParamTwo(Processor processor, int opcode)
         {
+            if (Immediate16Bit.ContainsBitCharInMap(opcode))
+                return new MemoryParam(processor, processor.Immediate16Bits(), 16);
+            if (Immediate8Bit.ContainsBitCharInMap(opcode))
+                return new MemoryParam(processor, processor.Immediate8Bits(), 8);
             return null;
         }
     }
