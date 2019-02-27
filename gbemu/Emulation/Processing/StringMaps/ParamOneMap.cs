@@ -108,19 +108,19 @@ namespace GBEmu.Emulation.Processing.StringMaps
             }
             if (AddressAtC.ContainsBitCharInMap(opcode))
             {
-                return new MemoryParam(processor, processor.Registers.C.Value);
+                return new MemoryParam(processor, processor.Registers.C);
             }
             if (AddressAtBC.ContainsBitCharInMap(opcode))
             {
-                return new MemoryParam(processor, processor.Registers.BC.Value);
+                return new MemoryParam(processor, processor.Registers.BC);
             }
             if (AddressAtDE.ContainsBitCharInMap(opcode))
             {
-                return new MemoryParam(processor, processor.Registers.DE.Value);
+                return new MemoryParam(processor, processor.Registers.DE);
             }
             if (AddressAtHL.ContainsBitCharInMap(opcode))
             {
-                return new MemoryParam(processor, processor.Registers.HL.Value);
+                return new MemoryParam(processor, processor.Registers.HL);
             }
             // TODO: Create exception ParamNotFound
             // For now return null
