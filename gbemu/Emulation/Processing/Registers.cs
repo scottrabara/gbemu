@@ -11,6 +11,8 @@ namespace GBEmu.Emulation.Processing
     /// </summary>
     internal class Registers
     {
+        private Register _hl, _bc, _de, _af;
+
         internal Register A { get; set; }
         internal Register B { get; set; }
         internal Register C { get; set; }
@@ -19,15 +21,14 @@ namespace GBEmu.Emulation.Processing
         internal Register F { get; set; }
         internal Register H { get; set; }
         internal Register L { get; set; }
-
-        // TODO: Reinstate the SetPair, GetPair logic
-        internal Register HL { get; set; }
-        internal Register BC { get; set; }
-        internal Register DE { get; set; }
-        internal Register AF { get; set; }
+        
+        internal Register HL { get { _hl.Value = GetPair(H, L); return _hl; } set { SetPair(HL, H, L); } }
+        internal Register BC { get { _bc.Value = GetPair(B, C); return _bc; } set { SetPair(BC, B, C); } }
+        internal Register DE { get { _de.Value = GetPair(D, E); return _de; } set { SetPair(DE, D, E); } }
+        internal Register AF { get { _af.Value = GetPair(A, F); return _af; } set { SetPair(AF, A, F); } }
 
         internal Register SP { get; set; }
-        internal Register PC {get; set; }
+        internal Register PC { get; set; }
 
         internal Registers()
         {
@@ -39,12 +40,12 @@ namespace GBEmu.Emulation.Processing
             F = new Register(RegisterEnum.F);
             H = new Register(RegisterEnum.H);
             L = new Register(RegisterEnum.L);
-            HL = new Register(RegisterEnum.HL, true);
-            BC = new Register(RegisterEnum.BC, true);
-            DE = new Register(RegisterEnum.DE, true);
-            AF = new Register(RegisterEnum.AF, true);
-            SP = new Register(RegisterEnum.SP);
-            PC = new Register(RegisterEnum.PC);
+            _hl = new Register(RegisterEnum.HL, true);
+            _bc = new Register(RegisterEnum.BC, true);
+            _de = new Register(RegisterEnum.DE, true);
+            _af = new Register(RegisterEnum.AF, true);
+            SP = new Register(RegisterEnum.SP, true);
+            PC = new Register(RegisterEnum.PC, true);
         }
 
         private int GetPair(Register r1, Register r2)
@@ -52,10 +53,10 @@ namespace GBEmu.Emulation.Processing
             return (r1.Value << 8) | r2.Value;
         }
 
-        private void SetPair(int value, Register r1, Register r2)
+        private void SetPair(Register origin, Register r1, Register r2)
         {
-            var left = value.GetLeftByte();
-            var right = value.GetRightByte();
+            var left = origin.Value.GetLeftByte();
+            var right = origin.Value.GetRightByte();
             r1.Value = left;
             r2.Value = right;
         }
