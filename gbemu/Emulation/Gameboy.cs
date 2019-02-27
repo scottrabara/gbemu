@@ -1,7 +1,9 @@
 ﻿using Autofac;
+using GBEmu.Emulation.Abstractions;
 using GBEmu.Emulation.Processing;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace GBEmu.Emulation
@@ -54,14 +56,27 @@ namespace GBEmu.Emulation
 
         public void Start()
         {
+            List<string> executedInstructions = new List<string>();
             while (Processor.Registers.PC.Value < 65535)
             {
-                int ins = Processor.FetchIns();
-                if (ins != -1)
+                int opcode = Processor.FetchOpcode();
+                if (opcode != -1)
                 {
-                    Action a = Processor.Decode(ins);
-                    Processor.Execute(a);
+                    IInstruction a = Processor.Decode(opcode);
+                    if (a != null)
+                    {
+                        executedInstructions.Add(a.ParsedInstruction);
+                        Processor.Execute(a);
+                    }
                 }
+            }
+
+            using (TextWriter tw = new StreamWriter("ExecutedInstructions.txt"))
+            {
+                foreach (string s in executedInstructions)
+                    tw.WriteLine(s);
+
+                tw.Flush();
             }
         }
     }
