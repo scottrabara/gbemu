@@ -48,7 +48,7 @@ namespace GBEmu.Emulation.Processing
         {
             var left = FetchOpcode();
             var right = FetchOpcode();
-            var result = (left << 8) | right;
+            var result = (left) | (right << 8);
             return result;
         }
 
@@ -69,12 +69,16 @@ namespace GBEmu.Emulation.Processing
                 // If instruction is found, create instruction instance as Instruction
                 var instruction = Activator.CreateInstance(type) as IInstruction;
 
-                // Fetch params using maps in ParamOneMap and ParamTwoMap
-                var instructionParams = ParamMap.GetParams(this, opcode);
-                instruction.Params = instructionParams;
+                // Assign opcode
+                instruction.Opcode = opcode;
 
-                // Return Action from defined Instruction type
-                // TODO: Return action, or invoke right away?
+                // Fetch params using maps in ParamOneMap and ParamTwoMap
+                instruction.Params = ParamMap.GetParams(this, opcode);
+
+                // Fetch initial Ticks information
+                instruction.Ticks = TicksMap.Ticks[opcode];
+
+                // Return Instruction object
                 return instruction;
             }
             // If no instruction is found, throw missing opcode exception
