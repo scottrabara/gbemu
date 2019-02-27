@@ -37,7 +37,7 @@ namespace GBEmu.Emulation.Processing
             MemoryController.Memory.MemoryMap[address] = value;
         }
 
-        internal int FetchIns()
+        internal int FetchOpcode()
         {
             var value = ReadByte(Registers.PC.Value);
             Registers.PC.Value++;
@@ -46,19 +46,19 @@ namespace GBEmu.Emulation.Processing
 
         internal int Immediate16Bits()
         {
-            var left = FetchIns();
-            var right = FetchIns();
+            var left = FetchOpcode();
+            var right = FetchOpcode();
             var result = (left << 8) | right;
             return result;
         }
 
         internal int Immediate8Bits()
         {
-            return FetchIns();
+            return FetchOpcode();
         }
 
         #region Instructions Method
-        internal Action Instruction(int opcode)
+        internal IInstruction Instruction(int opcode)
         {
             // Get instruction with params via opcode (etc: LD n, n)
             // using maps in InstructionMap
@@ -75,7 +75,7 @@ namespace GBEmu.Emulation.Processing
 
                 // Return Action from defined Instruction type
                 // TODO: Return action, or invoke right away?
-                return instruction.Action;
+                return instruction;
             }
             // If no instruction is found, throw missing opcode exception
             // TODO: Create Missing Opcode Exception, for now return null
@@ -83,18 +83,18 @@ namespace GBEmu.Emulation.Processing
         }
         #endregion
 
-        internal Action Decode(int opcode)
+        internal IInstruction Decode(int opcode)
         {
             // Given an opcode, fetch action to execute
-            Action action = Instruction(opcode);
-            return action;
+            IInstruction ins = Instruction(opcode);
+            return ins;
         }
         
-        internal void Execute(Action action)
+        internal void Execute(IInstruction ins)
         {
-            if (action != null)
+            if (ins != null)
             {
-                action.Invoke();
+                ins.Action.Invoke();
             }
         }
     }
