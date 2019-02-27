@@ -11,6 +11,17 @@ namespace GBEmu.Emulation.Processing.Instructions
     internal class RegisterParam : IInstructionParam
     {
         public Register Register { get; set; }
+        public bool IsPair => Register.IsPair;
+        public int Size => GetBytes();
+
+        private int GetBytes()
+        {
+            if (IsPair)
+            {
+                return 2;
+            }
+            return 1;
+        }
 
         public RegisterParam(Register r)
         {
@@ -31,7 +42,7 @@ namespace GBEmu.Emulation.Processing.Instructions
 
         public override string ToString()
         {
-            return $"{Register.Name.ToString()} ({Value.ToString("X2")})";
+            return $"0x{Value.ToString("X2")} [{Register.Name.ToString()}]";
         }
     }
 }

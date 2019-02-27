@@ -12,18 +12,27 @@ namespace GBEmu.Emulation.Processing.Instructions
     {
         private readonly Processor _processor;
 
-        internal MemoryParam(Processor p)
-        {
-            _processor = p;
-        }
-
-        internal MemoryParam(Processor p, int address)
+        internal MemoryParam(Processor p, int address, int size)
         {
             _processor = p;
             Address = address;
+            Size = size;
+        }
+
+        internal MemoryParam(Processor p, Register r)
+        {
+            _processor = p;
+            Register = r;
+            Address = Register.Value;
         }
 
         public int Address { get; set; }
+
+        /// <summary>
+        /// Size in bits
+        /// </summary>
+        public int Size { get; set; }
+        public Register Register { get; set; }
         public int Value
         {
             get
@@ -39,7 +48,12 @@ namespace GBEmu.Emulation.Processing.Instructions
 
         public override string ToString()
         {
-            return Value.ToString("X4");
+            if (Register != null)
+            {
+                return $"0x{Address.ToString("X4")} [({Register.Name.ToString()})]";
+            }
+
+            return $"0x{Address.ToString("X4")} [d{Size}]";
         }
     }
 }
