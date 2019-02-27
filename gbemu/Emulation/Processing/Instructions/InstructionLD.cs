@@ -17,6 +17,7 @@ namespace GBEmu.Emulation.Processing.Instructions
         public IInstructionParam ParamOne => Params[0];
         public IInstructionParam ParamTwo => Params[1];
         public string ParsedInstruction => GetParsedInstruction();
+        public int Cycles { get; set; }
 
         public Action Action => GetAction();
 
@@ -24,8 +25,8 @@ namespace GBEmu.Emulation.Processing.Instructions
         {
             return string.Format(
                 BaseInstruction, 
-                ParamOne.ToString(), 
-                ParamTwo.ToString());
+                ParamOne == null ? "null" : ParamOne.ToString(),
+                ParamTwo == null ? "null" : ParamTwo.ToString());
         }
 
         private Action GetAction()
