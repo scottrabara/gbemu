@@ -10,5 +10,7 @@ namespace GBEmu.Emulation.Abstractions
         string ParsedInstruction { get; }
         IInstructionParam[] Params { get; set; }
         Action Action { get; }
+        int Ticks { get; set; }
+        int Opcode { get; set; }
     }
 }
