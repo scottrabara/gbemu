@@ -17,7 +17,8 @@ namespace GBEmu.Emulation.Processing.Instructions
         public IInstructionParam ParamOne => Params[0];
         public IInstructionParam ParamTwo => Params[1];
         public string ParsedInstruction => GetParsedInstruction();
-        public int Cycles { get; set; }
+        public int Ticks { get; set; } 
+        public int Opcode { get; set; }
 
         public Action Action => GetAction();
 
