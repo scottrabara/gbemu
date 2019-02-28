@@ -1,6 +1,6 @@
 # gbemu 
 
-This is a Gameboy emulator written in C# and ASP.NET Core/Standard. If you are contributing to this, I highly recommend that you read through the Gameboy CPU Manual [here](http://marc.rawer.de/Gameboy/Docs/GBCPUman.pdf) as it is key to be intimately familiar with the Instruction Set of the Gameboy CPU.
+This is a Gameboy emulator written in C# and ASP.NET Core/Standard. Written purely for educational purposes!
 
 ### Current roadmap - 0.1.0
 - Start Project!
