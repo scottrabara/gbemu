@@ -12,8 +12,7 @@ namespace GBTest
         {
 
             var gameBoy = new Gameboy();
-
-            using (var fileStream = File.Open(@"C:\Users\scott\source\repos\gbemu\assets\ld.gb", FileMode.Open))
+            using (var fileStream = File.Open(@"../../../../assets/ld.gb", FileMode.Open))
             {
                 byte[] rom = FileUtils.ReadFully(fileStream, 0);
                 gameBoy.LoadRom(rom);

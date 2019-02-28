@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using GBEmu.Emulation.Processing;
 using System;
 
 namespace GBEmu.Emulation

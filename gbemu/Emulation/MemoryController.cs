@@ -1,4 +1,6 @@
-﻿namespace GBEmu.Emulation
+﻿using GBEmu.Emulation.Processing;
+
+namespace GBEmu.Emulation
 {
     public class MemoryController
     {
