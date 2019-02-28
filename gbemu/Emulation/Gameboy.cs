@@ -59,13 +59,15 @@ namespace GBEmu.Emulation
             List<string> executedInstructions = new List<string>();
             while (Processor.Registers.PC.Value < 65535)
             {
+                string startPC = Processor.Registers.PC.ToString();
                 int opcode = Processor.FetchOpcode();
                 if (opcode != -1)
                 {
                     IInstruction a = Processor.Decode(opcode);
                     if (a != null)
                     {
-                        executedInstructions.Add(a.ParsedInstruction);
+                        executedInstructions.Add(
+                            $"[{startPC}] - {a.ParsedInstruction}");
                         Processor.Execute(a);
                     }
                 }
