@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GBEmu.Utils;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -27,5 +28,17 @@ namespace GBEmu.Emulation.Processing
         internal int Value { get; set; }
         internal RegisterEnum Name { get; set; }
         internal bool IsPair { get; set; }
+
+        public override string ToString()
+        {
+            if (IsPair)
+            {
+                var left = Value.GetLeftByte();
+                var right = Value.GetRightByte();
+                var result = $"0x{left.ToString("X2")}{right.ToString("X2")}";
+                return result;
+            }
+            return $"0x{Value.ToString("X2")}";
+        }
     }
 }
