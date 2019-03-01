@@ -1,5 +1,6 @@
 ﻿using GBEmu.Emulation.Abstractions;
 using GBEmu.Emulation.Processing.Instructions;
+using GBEmu.Emulation.Processing.Params;
 using GBEmu.Utils;
 using System;
 using System.Collections.Generic;
@@ -19,15 +20,15 @@ namespace GBEmu.Emulation.Processing.StringMaps
         // TODO: Create maps for all registers given an opcode.
         #region Register Based Constants
         const string A =
-            "";
+            "20002000200020000101010101010101010101010101000000000000A020A000";
         const string B =
-            "";
+            "0000000000000000808080808080808080808080808080800000000000000000";
         const string C =
-            "";
+            "0000000000000000404040404040404040404040404040400000000000000000";
         const string D =
-            "";
+            "0000000000000000202020202020202020202020202020200000000000000000";
         const string E =
-            "";
+            "0000000000000000101010101010101010101010101010100000000000000000";
         const string F =
             "";
         const string H =
@@ -62,6 +63,16 @@ namespace GBEmu.Emulation.Processing.StringMaps
         // TODO: Hook up the StringMap checking
         public static IInstructionParam GetParamTwo(Processor processor, int opcode)
         {
+            if (A.ContainsBitCharInMap(opcode))
+                return new RegisterParam(processor.Registers.A);
+            if (B.ContainsBitCharInMap(opcode))
+                return new RegisterParam(processor.Registers.B);
+            if (C.ContainsBitCharInMap(opcode))
+                return new RegisterParam(processor.Registers.C);
+            if (D.ContainsBitCharInMap(opcode))
+                return new RegisterParam(processor.Registers.D);
+            if (E.ContainsBitCharInMap(opcode))
+                return new RegisterParam(processor.Registers.E);
             if (Immediate16Bit.ContainsBitCharInMap(opcode))
                 return new MemoryParam(processor, processor.Immediate16Bits(), 16);
             if (Immediate8Bit.ContainsBitCharInMap(opcode))

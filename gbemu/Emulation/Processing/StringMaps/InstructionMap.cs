@@ -27,7 +27,7 @@ namespace GBEmu.Emulation.Processing.StringMaps
         const string StringMapADD =
             "00400040004000400000000000000000FF000000000000000200000000800000";
         const string StringMapSUB =
-            "000000000000000000000000000000000000FF00000000000000020000000000"; 
+            "000000000000000000000000000000000000FF00000000000000020000000000";
 
         internal static Type GetInstruction(int opcode)
         {
