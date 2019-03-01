@@ -19,10 +19,10 @@ namespace GBEmu.Utils
             var index = (opcode / 4);
 
             // Get bit position for byte
-            var position = (4 - (opcode % 4)) - 1;
+            var power = (4 - (opcode % 4)) - 1;
 
             // Construct bitmask for position
-            var bytePositionMask = (int) Math.Pow(2, position);
+            var bitMask = (int) Math.Pow(2, power);
 
             // Get int from str[index]
             var selectedByte = int.Parse(str[index].ToString(), System.Globalization.NumberStyles.HexNumber);
@@ -33,8 +33,7 @@ namespace GBEmu.Utils
             //      7 = 0111
             //      2 = 0010
             //      Bitwise and = 0010
-            return (bytePositionMask & selectedByte) == bytePositionMask;
-
+            return (bitMask & selectedByte) == bitMask;
         }
     }
 }

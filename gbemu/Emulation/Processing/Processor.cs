@@ -24,17 +24,33 @@ namespace GBEmu.Emulation.Processing
         {
             // TODO: This can get added to DI call in GameboyComponentRegistration
             Registers = new Registers();
+
         }
 
         internal int ReadByte(int address)
         {
-            var value = MemoryController.Memory.MemoryMap[address];
-            return value;
+            try
+            {
+                var value = MemoryController.Memory.MemoryMap[address];
+                return value;
+            }
+            catch (Exception)
+            {
+                // Reading out of memory
+                return 0;
+            }
         }
 
         internal void WriteByte(int address, int value)
         {
-            MemoryController.Memory.MemoryMap[address] = value;
+            try
+            {
+                MemoryController.Memory.MemoryMap[address] = value;
+            }
+            catch (Exception)
+            {
+                // Writing out of memory, here for debugging purposes
+            }
         }
 
         internal int FetchOpcode()
