@@ -1,5 +1,6 @@
 ﻿using GBEmu.Emulation.Abstractions;
 using GBEmu.Emulation.Processing.Instructions;
+using GBEmu.Emulation.Processing.Params;
 using GBEmu.Utils;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace GBEmu.Emulation.Processing.StringMaps
 
         #region Register Based Constants
         const string A =
-            "002000200020002000000000000000FFFFFFFFFFFFFFFFFF090909090909A222";
+            "002000200020002000000000000000FFFFFFFFFFFFFFFFFF0202020202029222";
         const string B =
             "0E00000000000000FF0000000000000000000000000000000000000000000000";
         const string C =

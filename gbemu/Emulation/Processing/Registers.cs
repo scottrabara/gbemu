@@ -1,6 +1,7 @@
 ﻿
 using GBEmu.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -22,10 +23,10 @@ namespace GBEmu.Emulation.Processing
         internal Register H { get; set; }
         internal Register L { get; set; }
         
-        internal Register HL { get { _hl.Value = GetPair(H, L); return _hl; } set { SetPair(HL, H, L); } }
-        internal Register BC { get { _bc.Value = GetPair(B, C); return _bc; } set { SetPair(BC, B, C); } }
-        internal Register DE { get { _de.Value = GetPair(D, E); return _de; } set { SetPair(DE, D, E); } }
-        internal Register AF { get { _af.Value = GetPair(A, F); return _af; } set { SetPair(AF, A, F); } }
+        internal Register HL { get { _hl.Value = GetPair(H, L); return _hl; } set { SetPair(_hl, H, L); } }
+        internal Register BC { get { _bc.Value = GetPair(B, C); return _bc; } set { SetPair(_bc, B, C); } }
+        internal Register DE { get { _de.Value = GetPair(D, E); return _de; } set { SetPair(_de, D, E); } }
+        internal Register AF { get { _af.Value = GetPair(A, F); return _af; } set { SetPair(_af, A, F); } }
 
         internal Register SP { get; set; }
         internal Register PC { get; set; }

@@ -3,6 +3,7 @@ using GBEmu.Emulation.Abstractions;
 using GBEmu.Emulation.Processing;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -57,28 +58,37 @@ namespace GBEmu.Emulation
         public void Start()
         {
             List<string> executedInstructions = new List<string>();
-            while (Processor.Registers.PC.Value < 65535)
+            try
             {
-                string startPC = Processor.Registers.PC.ToString();
-                int opcode = Processor.FetchOpcode();
-                if (opcode != -1)
+                while (Processor.Registers.PC.Value < 65535)
                 {
-                    IInstruction a = Processor.Decode(opcode);
-                    if (a != null)
+                    //if (Processor.Registers.PC.Value == 18059)
+                    //{
+                    //    Debugger.Break();
+                    //}
+                    string startPC = Processor.Registers.PC.ToString();
+                    int opcode = Processor.FetchOpcode();
+                    if (opcode != -1)
                     {
-                        executedInstructions.Add(
-                            $"[{startPC}] - {a.ParsedInstruction}");
-                        Processor.Execute(a);
+                        IInstruction a = Processor.Decode(opcode);
+                        if (a != null)
+                        {
+                            executedInstructions.Add(
+                                $"[{startPC}] - {a.ParsedInstruction}");
+                            Processor.Execute(a);
+                        }
                     }
                 }
             }
-
-            using (TextWriter tw = new StreamWriter("ExecutedInstructions.txt"))
+            finally
             {
-                foreach (string s in executedInstructions)
-                    tw.WriteLine(s);
+                using (TextWriter tw = new StreamWriter("ExecutedInstructions.txt"))
+                {
+                    foreach (string s in executedInstructions)
+                        tw.WriteLine(s);
 
-                tw.Flush();
+                    tw.Flush();
+                }
             }
         }
     }

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GBEmu.Emulation.Processing.Instructions
+namespace GBEmu.Emulation.Processing.Params
 {
     /// <summary>
     /// Param representing a Register from the Gameboy CPU.
