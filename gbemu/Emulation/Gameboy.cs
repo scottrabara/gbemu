@@ -57,16 +57,14 @@ namespace GBEmu.Emulation
 
         public void Start()
         {
+            var sw = new Stopwatch();
             List<string> executedInstructions = new List<string>();
             try
             {
-                while (Processor.Registers.PC.Value < 65535)
+                sw.Start();
+                while (Processor.Registers[RegisterEnum.PC].Value < 65535)
                 {
-                    //if (Processor.Registers.PC.Value == 18059)
-                    //{
-                    //    Debugger.Break();
-                    //}
-                    string startPC = Processor.Registers.PC.ToString();
+                    string startPC = Processor.Registers[RegisterEnum.PC].ToString();
                     int opcode = Processor.FetchOpcode();
                     if (opcode != -1)
                     {
@@ -79,11 +77,13 @@ namespace GBEmu.Emulation
                         }
                     }
                 }
+                sw.Stop();
             }
             finally
             {
                 using (TextWriter tw = new StreamWriter("ExecutedInstructions.txt"))
                 {
+                    tw.WriteLine($"Elapsed time {sw.ElapsedMilliseconds}ms");
                     foreach (string s in executedInstructions)
                         tw.WriteLine(s);
 

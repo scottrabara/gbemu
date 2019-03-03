@@ -10,39 +10,32 @@ namespace GBEmu.Emulation.Processing.Params
     /// </summary>
     internal class RegisterParam : IInstructionParam
     {
-        public Register Register { get; set; }
-        public bool IsPair => Register.IsPair;
-        public int Size => GetBytes();
+        public Processor Processor { get; set; }
+        public RegisterEnum Register { get; set; }
 
-        private int GetBytes()
+        public RegisterParam(Processor p, RegisterEnum rEnum)
         {
-            if (IsPair)
-            {
-                return 2;
-            }
-            return 1;
-        }
-
-        public RegisterParam(Register r)
-        {
-            Register = r;
+            Processor = p;
+            Register = rEnum;
         }
 
         public int Value
         {
             get
             {
-                return Register.Value;
+                return Processor.Registers[Register].Value;
             }
             set
             {
-                Register.Value = value;
+                var temp = Processor.Registers[Register];
+                temp.Value = value;
+                Processor.Registers[Register] = temp;
             }
         }
 
         public override string ToString()
         {
-            return $"0x{Value.ToString("X2")} [{Register.Name.ToString()}]";
+            return $"0x{Value.ToString("X2")} [{Processor.Registers[Register].Name.ToString()}]";
         }
     }
 }

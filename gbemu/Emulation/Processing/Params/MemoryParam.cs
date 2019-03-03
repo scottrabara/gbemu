@@ -11,6 +11,12 @@ namespace GBEmu.Emulation.Processing.Params
     internal class MemoryParam : IInstructionParam
     {
         private readonly Processor _processor;
+        public int Address { get; set; }
+        /// <summary>
+        /// Size in bits
+        /// </summary>
+        public int Size { get; set; }
+        public RegisterEnum Register { get; set; }
 
         internal MemoryParam(Processor p, int address, int size)
         {
@@ -19,20 +25,12 @@ namespace GBEmu.Emulation.Processing.Params
             Size = size;
         }
 
-        internal MemoryParam(Processor p, Register r)
+        internal MemoryParam(Processor p, RegisterEnum r)
         {
             _processor = p;
             Register = r;
-            Address = Register.Value;
+            Address = _processor.Registers[Register].Value;
         }
-
-        public int Address { get; set; }
-
-        /// <summary>
-        /// Size in bits
-        /// </summary>
-        public int Size { get; set; }
-        public Register Register { get; set; }
         public int Value
         {
             get
@@ -48,9 +46,9 @@ namespace GBEmu.Emulation.Processing.Params
 
         public override string ToString()
         {
-            if (Register != null)
+            if (Register > 0)
             {
-                return $"0x{Address.ToString("X4")} [({Register.Name.ToString()})]";
+                return $"0x{Address.ToString("X4")} [({_processor.Registers[Register].Name.ToString()})]";
             }
 
             return $"0x{Address.ToString("X4")} [d{Size}]";
