@@ -1,6 +1,6 @@
 # gbemu 
 
-[![CircleCI](https://circleci.com/gh/scottrabara/gbemu.svg?style=svg)](https://circleci.com/gh/scottrabara/gbemu)
+![CircleCI branch](https://img.shields.io/circleci/project/github/scottrabara/gbemu/master.svg)
 
 This is a Gameboy emulator written in C# and ASP.NET Core/Standard. Written purely for educational purposes!
 
