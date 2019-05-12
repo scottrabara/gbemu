@@ -12,41 +12,73 @@ namespace GBEmu.Emulation.Processing
     /// </summary>
     internal class Registers
     {
-        private Register _hl, _bc, _de, _af;
-
-        internal Register A { get; set; }
-        internal Register B { get; set; }
-        internal Register C { get; set; }
-        internal Register D { get; set; }
-        internal Register E { get; set; }
-        internal Register F { get; set; }
-        internal Register H { get; set; }
-        internal Register L { get; set; }
-        
-        internal Register HL { get { _hl.Value = GetPair(H, L); return _hl; } set { SetPair(_hl, H, L); } }
-        internal Register BC { get { _bc.Value = GetPair(B, C); return _bc; } set { SetPair(_bc, B, C); } }
-        internal Register DE { get { _de.Value = GetPair(D, E); return _de; } set { SetPair(_de, D, E); } }
-        internal Register AF { get { _af.Value = GetPair(A, F); return _af; } set { SetPair(_af, A, F); } }
-
-        internal Register SP { get; set; }
-        internal Register PC { get; set; }
+        internal Register[] _registers =
+            new Register[] 
+            {
+                new Register(RegisterEnum.B),
+                new Register(RegisterEnum.C),
+                new Register(RegisterEnum.D),
+                new Register(RegisterEnum.E),
+                new Register(RegisterEnum.H),
+                new Register(RegisterEnum.L),
+                new Register(RegisterEnum.HL),
+                new Register(RegisterEnum.A),
+                new Register(RegisterEnum.F),
+                new Register(RegisterEnum.BC),
+                new Register(RegisterEnum.DE),
+                new Register(RegisterEnum.AF),
+                new Register(RegisterEnum.SP),
+                new Register(RegisterEnum.PC)
+            };
 
         internal Registers()
         {
-            A = new Register(RegisterEnum.A);
-            B = new Register(RegisterEnum.B);
-            C = new Register(RegisterEnum.C);
-            D = new Register(RegisterEnum.D);
-            E = new Register(RegisterEnum.E);
-            F = new Register(RegisterEnum.F);
-            H = new Register(RegisterEnum.H);
-            L = new Register(RegisterEnum.L);
-            _hl = new Register(RegisterEnum.HL, true);
-            _bc = new Register(RegisterEnum.BC, true);
-            _de = new Register(RegisterEnum.DE, true);
-            _af = new Register(RegisterEnum.AF, true);
-            SP = new Register(RegisterEnum.SP, true);
-            PC = new Register(RegisterEnum.PC, true);
+
+        }
+
+        internal Register this[RegisterEnum r]
+        {
+            get
+            {
+                var individuals = GetRegisterEnumFromPair(r);
+                if (individuals != null)
+                {
+                    GetPair(
+                        _registers[(int)individuals[0]], 
+                        _registers[(int)individuals[1]]
+                    );
+                }
+                return _registers[(int) r];
+            }
+            set
+            {
+                var individuals = GetRegisterEnumFromPair(r);
+                if (individuals != null)
+                {
+                    SetPair(
+                        value,
+                        _registers[(int)individuals[0]],
+                        _registers[(int)individuals[1]]
+                    );
+                }
+                _registers[(int)r] = value;
+            }
+        }
+
+        private RegisterEnum[] GetRegisterEnumFromPair(RegisterEnum r)
+        {
+            switch (r)
+            {
+                case RegisterEnum.HL:
+                    return new [] { RegisterEnum.H, RegisterEnum.L };
+                case RegisterEnum.BC:
+                    return new [] { RegisterEnum.B, RegisterEnum.C };
+                case RegisterEnum.DE:
+                    return new [] { RegisterEnum.D, RegisterEnum.E };
+                case RegisterEnum.AF:
+                    return new [] { RegisterEnum.A, RegisterEnum.F };
+            }
+            return null;
         }
 
         private int GetPair(Register r1, Register r2)

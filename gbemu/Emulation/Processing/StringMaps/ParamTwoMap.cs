@@ -61,15 +61,15 @@ namespace GBEmu.Emulation.Processing.StringMaps
         public static IInstructionParam GetParamTwo(Processor processor, int opcode)
         {
             if (A.ContainsBitCharInMap(opcode))
-                return new RegisterParam(processor.Registers.A);
+                return new RegisterParam(processor, RegisterEnum.A);
             if (B.ContainsBitCharInMap(opcode))
-                return new RegisterParam(processor.Registers.B);
+                return new RegisterParam(processor, RegisterEnum.B);
             if (C.ContainsBitCharInMap(opcode))
-                return new RegisterParam(processor.Registers.C);
+                return new RegisterParam(processor, RegisterEnum.C);
             if (D.ContainsBitCharInMap(opcode))
-                return new RegisterParam(processor.Registers.D);
+                return new RegisterParam(processor, RegisterEnum.D);
             if (E.ContainsBitCharInMap(opcode))
-                return new RegisterParam(processor.Registers.E);
+                return new RegisterParam(processor, RegisterEnum.E);
             if (Immediate16Bit.ContainsBitCharInMap(opcode))
                 return new MemoryParam(processor, processor.Immediate16Bits(), 16);
             if (Immediate8Bit.ContainsBitCharInMap(opcode))

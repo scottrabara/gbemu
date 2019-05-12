@@ -55,8 +55,8 @@ namespace GBEmu.Emulation.Processing
 
         internal int FetchOpcode()
         {
-            var value = ReadByte(Registers.PC.Value);
-            Registers.PC.Value++;
+            var value = ReadByte(Registers[RegisterEnum.PC].Value);
+            Registers[RegisterEnum.PC].Value++;
             return value;
         }
 

@@ -61,67 +61,67 @@ namespace GBEmu.Emulation.Processing.StringMaps
         {
             if (A.ContainsBitCharInMap(opcode))
             {
-                return new RegisterParam(processor.Registers.A);
+                return new RegisterParam(processor, RegisterEnum.A);
             }
             if (B.ContainsBitCharInMap(opcode))
             {
-                return new RegisterParam(processor.Registers.B);
+                return new RegisterParam(processor, RegisterEnum.B);
             }
             if (C.ContainsBitCharInMap(opcode))
             {
-                return new RegisterParam(processor.Registers.C);
+                return new RegisterParam(processor, RegisterEnum.C);
             }
             if (D.ContainsBitCharInMap(opcode))
             {
-                return new RegisterParam(processor.Registers.D);
+                return new RegisterParam(processor, RegisterEnum.D);
             }
             if (E.ContainsBitCharInMap(opcode))
             {
-                return new RegisterParam(processor.Registers.E);
+                return new RegisterParam(processor, RegisterEnum.E);
             }
             if (H.ContainsBitCharInMap(opcode))
             {
-                return new RegisterParam(processor.Registers.H);
+                return new RegisterParam(processor, RegisterEnum.H);
             }
             if (L.ContainsBitCharInMap(opcode))
             {
-                return new RegisterParam(processor.Registers.L);
+                return new RegisterParam(processor, RegisterEnum.L);
             }
             if (BC.ContainsBitCharInMap(opcode))
             {
-                return new RegisterParam(processor.Registers.BC);
+                return new RegisterParam(processor, RegisterEnum.BC);
             }
             if (DE.ContainsBitCharInMap(opcode))
             {
-                return new RegisterParam(processor.Registers.DE);
+                return new RegisterParam(processor, RegisterEnum.DE);
             }
             if (HL.ContainsBitCharInMap(opcode))
             {
-                return new RegisterParam(processor.Registers.HL);
+                return new RegisterParam(processor, RegisterEnum.HL);
             }
             if (AF.ContainsBitCharInMap(opcode))
             {
-                return new RegisterParam(processor.Registers.AF);
+                return new RegisterParam(processor, RegisterEnum.AF);
             }
             if (SP.ContainsBitCharInMap(opcode))
             {
-                return new RegisterParam(processor.Registers.SP);
+                return new RegisterParam(processor, RegisterEnum.SP);
             }
             if (AddressAtC.ContainsBitCharInMap(opcode))
             {
-                return new MemoryParam(processor, processor.Registers.C);
+                return new MemoryParam(processor, RegisterEnum.C);
             }
             if (AddressAtBC.ContainsBitCharInMap(opcode))
             {
-                return new MemoryParam(processor, processor.Registers.BC);
+                return new MemoryParam(processor, RegisterEnum.BC);
             }
             if (AddressAtDE.ContainsBitCharInMap(opcode))
             {
-                return new MemoryParam(processor, processor.Registers.DE);
+                return new MemoryParam(processor, RegisterEnum.DE);
             }
             if (AddressAtHL.ContainsBitCharInMap(opcode))
             {
-                return new MemoryParam(processor, processor.Registers.HL);
+                return new MemoryParam(processor, RegisterEnum.HL);
             }
             // TODO: Create exception ParamNotFound
             // For now return null
