@@ -24,16 +24,22 @@ namespace GBEmu.Emulation.Processing.StringMaps
             "0000800000000000000000000000000000000000000000000000000000000000";
         const string StringMapHALT =
             "0000000000000000000000000000020000000000000000000000000000000000";
-        const string StringMapLD = 
+        const string StringMapLD =
             "6010601060106010FFFFFFFFFFFFFDFF000000000000000000000000A020A020";
+        const string StringMapLDH =
+            "";
         const string StringMapDEC =
             "0414041404140414000000000000000000000000000000000000000000000000";
         const string StringMapINC =
             "1808180818081808000000000000000000000000000000000000000000000000";
         const string StringMapADD =
             "00400040004000400000000000000000FF000000000000000200000000800000";
+        const string StringMapADC =
+            "";
         const string StringMapSUB =
             "000000000000000000000000000000000000FF00000000000000020000000000";
+        const string StringMapSBC =
+            "";
         const string StringMapAND =
             "0000000000000000000000000000000000000000FF0000000000000000000000";
         const string StringMapXOR =
@@ -46,18 +52,41 @@ namespace GBEmu.Emulation.Processing.StringMaps
             "0000000000000000000000000000000000000000000000000000000000001000";
         const string StringMapEI =
             "0000000000000000000000000000000000000000000000000000000000000010";
-
+        const string StringMapJP =
+            "";
+        const string StringMapJR =
+            "";
+        const string StringMapRST =
+            "";
+        const string StringMapRET =
+            "";
+        const string StringMapRETI =
+            "";
+        const string StringMapPUSH =
+            "";
+        const string StringMapPOP =
+            "";
+        const string StringMapCALL =
+            "";
+        const string StringMapRLCA =
+            "";
+        const string StringMapRLA =
+            "";
+        const string StringMapDAA =
+            "";
+        const string StringMapSCF =
+            "";
         internal static Type GetInstruction(int opcode)
         {
             if (StringMapNOP.ContainsBitCharInMap(opcode))
             {
                 return typeof(InstructionNOP);
             }
-            if (StringMapNOP.ContainsBitCharInMap(opcode))
+            if (StringMapSTOP.ContainsBitCharInMap(opcode))
             {
                 return typeof(InstructionSTOP);
             }
-            if (StringMapNOP.ContainsBitCharInMap(opcode))
+            if (StringMapHALT.ContainsBitCharInMap(opcode))
             {
                 return typeof(InstructionHALT);
             }

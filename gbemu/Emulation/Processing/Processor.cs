@@ -24,7 +24,7 @@ namespace GBEmu.Emulation.Processing
         {
             // TODO: This can get added to DI call in GameboyComponentRegistration
             Registers = new Registers();
-
+        
         }
 
         internal int ReadByte(int address)
