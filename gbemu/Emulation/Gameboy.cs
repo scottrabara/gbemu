@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using GBEmu.Emulation.Abstractions;
 using GBEmu.Emulation.Processing;
+using GBEmu.Emulation.Processing.Exceptions;
+using GBEmu.Emulation.Processing.StringMaps;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -68,12 +70,17 @@ namespace GBEmu.Emulation
                     int opcode = Processor.FetchOpcode();
                     if (opcode != -1)
                     {
-
                         IInstruction a = Processor.Decode(opcode);
                         if (a != null)
                         {
                             executedInstructions.Add($"[{startPC}] - {a.ParsedInstruction} - {sw.ElapsedMilliseconds}ms");
                             Processor.Execute(a);
+                        }
+                        else
+                        {
+                            var ins = InstructionMap.Ins[opcode];
+                            if (ins != null)
+                                executedInstructions.Add($"[{startPC}] - NOT IMPLEMENTED {ins.Name} - {sw.ElapsedMilliseconds}ms");
                         }
                     }
                     sw.Reset();

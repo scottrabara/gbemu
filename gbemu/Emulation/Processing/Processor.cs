@@ -1,4 +1,5 @@
 ﻿using GBEmu.Emulation.Abstractions;
+using GBEmu.Emulation.Processing.Exceptions;
 using GBEmu.Emulation.Processing.Instructions;
 using GBEmu.Emulation.Processing.StringMaps;
 using GBEmu.Utils;
@@ -78,13 +79,18 @@ namespace GBEmu.Emulation.Processing
         {
             // Get instruction with params via opcode (etc: LD n, n)
             // using maps in InstructionMap
-            Type type = InstructionMap.GetInstruction(opcode);
-
-            if (type != null)
+            Type type = InstructionMap.Ins[opcode];
+            
+            if (type == null)
             {
-                // If instruction is found, create instruction instance as Instruction
-                var instruction = Activator.CreateInstance(type) as IInstruction;
+                return null;
+            }
 
+            // If instruction is found, create instruction instance as Instruction
+            var instruction = Activator.CreateInstance(type) as IInstruction;
+
+            if (instruction != null)
+            {
                 // Assign opcode
                 instruction.Opcode = opcode;
 
@@ -105,7 +111,6 @@ namespace GBEmu.Emulation.Processing
 
         internal IInstruction Decode(int opcode)
         {
-            // Given an opcode, fetch action to execute
             IInstruction ins = Instruction(opcode);
             return ins;
         }
