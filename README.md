@@ -17,9 +17,6 @@ This is a Gameboy emulator written in C# and ASP.NET Core/Standard. Written pure
 - Look into MemoryController and Memory management
 
 
-All decisions are loosely made are open for discussion for improvement. Most decisions are based from the documentation of the Gameboy development cycle as well as the resources linked below.
-
-
 ### Some development resources
 
 - [Awesome curated list of Emulator Development Resources](https://github.com/gbdev/awesome-gbdev#emulator-development)
