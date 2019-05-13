@@ -1,5 +1,4 @@
 ﻿using GBEmu.Emulation.Abstractions;
-using GBEmu.Emulation.Processing.Exceptions;
 using GBEmu.Emulation.Processing.Instructions;
 using GBEmu.Emulation.Processing.StringMaps;
 using GBEmu.Utils;
@@ -79,7 +78,7 @@ namespace GBEmu.Emulation.Processing
         {
             // Get instruction with params via opcode (etc: LD n, n)
             // using maps in InstructionMap
-            Type type = InstructionMap.Ins[opcode];
+            Type type = Lookup.Ins[opcode];
             
             if (type == null)
             {

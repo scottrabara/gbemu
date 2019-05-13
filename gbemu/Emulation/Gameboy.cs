@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using GBEmu.Emulation.Abstractions;
 using GBEmu.Emulation.Processing;
-using GBEmu.Emulation.Processing.Exceptions;
 using GBEmu.Emulation.Processing.StringMaps;
 using System;
 using System.Collections.Generic;
@@ -78,7 +77,7 @@ namespace GBEmu.Emulation
                         }
                         else
                         {
-                            var ins = InstructionMap.Ins[opcode];
+                            var ins = Lookup.Ins[opcode];
                             if (ins != null)
                                 executedInstructions.Add($"[{startPC}] - NOT IMPLEMENTED {ins.Name} - {sw.ElapsedMilliseconds}ms");
                         }
